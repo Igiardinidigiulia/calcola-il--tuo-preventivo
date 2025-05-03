@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcola il tuo preventivo online - I Giardini di Giulia</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1, h2, h3, h4 {
+      color: #4a7c59;
+    }
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    
+    h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 10px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+    }
+    
+    .section-icon {
+      font-size: 22px;
+      margin-right: 10px;
+    }
+    
+    .quote-container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .form-group select,
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+      font-size: 16px;
+      transition: border 0.3s ease;
+    }
+    
+    .form-group select:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #4a7c59;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(74, 124, 89, 0.2);
+    }
+    
+    .form-group input[type="number"] {
+      max-width: 150px;
+    }
+    
+    .pricing-info {
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 25px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    
+    .pricing-title {
+      color: #4a7c59;
+      margin-bottom: 15px;
+      font-weight: 600;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .pricing-table th,
+    .pricing-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .pricing-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+      color: #4a7c59;
+    }
+    
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .pricing-note {
+      font-size: 14px;
+      color: #777;
+      margin-top: 15px;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      background: #fafafa;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    
+    .note-icon {
+      font-size: 16px;
+      margin-right: 8px;
+      color: #8B6D27;
+    }
+    
+    .personalization-note {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px 20px;
+      margin: 25px 0;
+      border-radius: 4px;
+      position: relative;
+    }
+    
+    .personalization-note h4 {
+      color: #856404;
+      margin-top: 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .quote-results {
+      background-color: #f0f7f3;
+      padding: 25px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-left: 4px solid #4a7c59;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+    
+    .result-item:last-of-type {
+      border-bottom: none;
+    }
+    
+    .result-total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid #ddd;
+      color: #4a7c59;
+    }
+    
+    .quote-section {
+      margin-bottom: 35px;
+    }
+    
+    .button {
+      padding: 14px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      min-width: 200px;
+      display: inline-block;
+      margin: 10px;
+      color: white;
+    }
+    
+    .primary-button {
+      background-color: #4a7c59;
+    }
+    
+    .primary-button:hover {
+      background-color: #3d6649;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .secondary-button {
+      background-color: #8B6D27;
+    }
+    
+    .secondary-button:hover {
+      background-color: #775c21;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .product-preview {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .product-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+    }
+    
+    .product-details {
+      flex: 1;
+    }
+    
+    .product-title {
+      font-weight: 600;
+      color: #4a7c59;
+      margin-bottom: 5px;
+    }
+    
+    .product-price {
+      color: #666;
+    }
+    
+    .success-message {
+      display: none;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .error-message {
+      display: none;
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+    
+    @media (max-width: 767px) {
+      .quote-container {
+        padding: 20px 15px;
+      }
+      
+      .product-preview {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .product-image {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Calcola il tuo preventivo online</h1>
+    
+    <div class="quote-container">
+      <div id="quoteForm">
+        <div class="pricing-info">
+          <div class="pricing-title">
+            <span class="section-icon">💰</span> Prezzi Packaging Personalizzato
+          </div>
+          <p>Il costo della personalizzazione varia in base alla quantità ordinata:</p>
+          
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Quantità</th>
+                <th>Prezzo per scatola</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>7-20 scatole</td>
+                <td>€7,50 per scatola</td>
+              </tr>
+              <tr>
+                <td>21-30 scatole</td>
+                <td>€6,50 per scatola</td>
+              </tr>
+              <tr>
+                <td>31-50 scatole</td>
+                <td>€5,50 per scatola</td>
+              </tr>
+              <tr>
+                <td>51-100 scatole</td>
+                <td>€4,00 per scatola</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p class="pricing-note">
+            <span class="note-icon">ℹ️</span> La personalizzazione al di sotto di un minimo di 7 scatole non è possibile. Per quantità superiori a 100 pezzi, contattaci direttamente per un preventivo dedicato.
+          </p>
+        </div>
+        
+        <div class="personalization-note">
+          <h4><span class="section-icon">💡</span> Nota sulla personalizzazione</h4>
+          <p>I dettagli specifici della personalizzazione possono essere definiti successivamente all'acquisto o alla richiesta di preventivo. Il nostro team ti contatterà per finalizzare tutti gli aspetti del tuo ordine personalizzato.</p>
+        </div>
+        
+        <!-- FORM INIZIO -->
+        <form id="weddingForm" action="https://formspree.io/f/myzwedzb" method="POST">
+          <div class="quote-section">
+            <h3><span class="section-icon">🌿</span> 1. Seleziona il prodotto e la quantità</h3>
+            
+            <div class="form-group">
+              <label for="productSelect">Seleziona un prodotto</label>
+              <select id="productSelect" name="Prodotto">
+                <option value="">-- Seleziona un prodotto --</option>
+                <option value="Mini Bonsai Olivo" data-price="9.90" data-image="https://igiardinidigiulia.it/cdn/shop/files/IMG_6860.heic?v=1736585459&width=300">Mini Bonsai Olivo in vaso ceramica Bianco - €9,90</option>
+                <option value="Bonsai Mini Ficus Ginseng" data-price="13.50" data-image="https://igiardinidigiulia.it/cdn/shop/products/bonsai-mini-ficus-ginseng-in-vaso-di-ceramica-da-11-cm-bonsai-piccoli-i-giardini-di-giulia-718893.jpg?v=1665472761&width=300">Bonsai Mini Ficus Ginseng - €13,50</option>
+                <option value="Bonsai ficus ginseng bianco" data-price="14.50" data-image="https://igiardinidigiulia.it/cdn/shop/products/bonsai-ficus-ginseng-in-vaso-ceramica-bianco-bonsai-piccoli-i-giardini-di-giulia-356539.jpg?v=1666185629&width=300">Bonsai ficus ginseng in vaso ceramica bianco - €14,50</option>
+                <option value="Tradescantia Nanouk" data-price="14.50" data-image="https://igiardinidigiulia.it/cdn/shop/products/tradescantia-nanouk-in-vaso-ceramica-carina-piante-verdi-i-giardini-di-giulia-111791.jpg?v=1666099215&width=300">Tradescantia Nanouk in Vaso ceramica - €14,50</option>
+                <option value="Terrarium geometrico Dalia" data-price="16.50" data-image="https://igiardinidigiulia.it/cdn/shop/products/terrarium-geometrico-dalia-con-piante-verdi-terrarium-i-giardini-di-giulia-898232.jpg?v=1666170223&width=300">Terrarium geometrico Dalia - €16,50</option>
+                <option value="Terrarium geometrico Kira" data-price="16.50" data-image="https://igiardinidigiulia.it/cdn/shop/products/terrarium-geometrico-kira-con-piante-grasse-terrarium-i-giardini-di-giulia-596522.jpg?v=1666170514&width=300">Terrarium geometrico Kira - €16,50</option>
+                <option value="Quadro stabilizzato mini bianco" data-price="19.90" data-image="https://igiardinidigiulia.it/cdn/shop/files/quadro-stabilizzato-mini-bianco-diametro-20-cmquadro-di-verde-stabilizzatoi-giardini-di-giulia-248662.jpg?v=1742850824&width=300">Quadro stabilizzato mini bianco - €19,90</option>
+              </select>
+              <div id="productError" class="error-message">Seleziona un prodotto</div>
+            </div>
+            
+            <div id="productPreview" class="product-preview hidden">
+              <img id="productImage" src="" alt="Immagine prodotto" class="product-image">
+              <div class="product-details">
+                <div id="productTitle" class="product-title"></div>
+                <div id="productPrice" class="product-price"></div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="quantity">Numero di pezzi <small>(minimo 7 per la personalizzazione)</small></label>
+              <input type="number" id="quantity" name="Quantità" min="7" value="7">
+              <div id="quantityError" class="error-message">La quantità minima è 7 pezzi</div>
+            </div>
+          </div>
+          
+          <div class="quote-results">
+            <div class="result-item">
+              <span>Prezzo unitario prodotto:</span>
+              <span id="unitPrice">€0,00</span>
+            </div>
+            <div class="result-item">
+              <span>Subtotale prodotti:</span>
+              <span id="subtotalPrice">€0,00</span>
+            </div>
+            <div class="result-item">
+              <span>Costo packaging personalizzato:</span>
+              <span id="packagingCost">€0,00</span>
+            </div>
+            <div class="result-item result-total">
+              <span>Totale preventivo:</span>
+              <span id="totalPrice">€0,00</span>
+            </div>
+            
+            <!-- Hidden fields for form submission -->
+            <input type="hidden" name="Prezzo unitario" id="unitPriceHidden">
+            <input type="hidden" name="Subtotale prodotti" id="subtotalHidden">
+            <input type="hidden" name="Costo packaging" id="packagingHidden">
+            <input type="hidden" name="Totale preventivo" id="totalHidden">
+          </div>
+          
+          <div class="quote-section">
+            <h3><span class="section-icon">👤</span> 2. Inserisci i tuoi dati</h3>
+            
+            <div class="form-group">
+              <label for="name">Nome e cognome *</label>
+              <input type="text" id="name" name="Nome" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="Email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Telefono</label>
+              <input type="tel" id="phone" name="Telefono">
+            </div>
+            
+            <div class="form-group">
+              <label for="eventDate">Data dell'evento</label>
+              <input type="date" id="eventDate" name="Data evento">
+            </div>
+            
+            <div class="form-group">
+              <label for="customText">Note sulla personalizzazione</label>
+              <textarea id="customText" name="Note personalizzazione" rows="3" placeholder="Inserisci eventuali note sulla personalizzazione (es. colori, stile, preferenze...)"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="additionalInfo">Note aggiuntive</label>
+              <textarea id="additionalInfo" name="Note aggiuntive" rows="4" placeholder="Inserisci qui eventuali richieste speciali o informazioni aggiuntive"></textarea>
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <button type="submit" id="submitQuoteBtn" class="button primary-button">
+              <span class="section-icon">📩</span> Richiedi preventivo
+            </button>
+            <button type="button" id="buyNowBtn" class="button secondary-button">
+              <span class="section-icon">🛒</span> Acquista ora
+            </button>
+          </div>
+        </form>
+        <!-- FORM FINE -->
+      </div>
+      
+      <div id="successMessage" class="success-message">
+        <h2>Grazie per la tua richiesta!</h2>
+        <p>Abbiamo ricevuto il tuo preventivo e ti contatteremo al più presto per finalizzare i dettagli della tua personalizzazione.</p>
+        <button id="newQuoteBtn" class="button primary-button">Richiedi un nuovo preventivo</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elements
+      const weddingForm = document.getElementById('weddingForm');
+      const productSelect = document.getElementById('productSelect');
+      const quantity = document.getElementById('quantity');
+      const unitPrice = document.getElementById('unitPrice');
+      const subtotalPrice = document.getElementById('subtotalPrice');
+      const packagingCost = document.getElementById('packagingCost');
+      const totalPrice = document.getElementById('totalPrice');
+      const productError = document.getElementById('productError');
+      const quantityError = document.getElementById('quantityError');
+      const productPreview = document.getElementById('productPreview');
+      const productImage = document.getElementById('productImage');
+      const productTitle = document.getElementById('productTitle');
+      const productPriceEl = document.getElementById('productPrice');
+      const submitQuoteBtn = document.getElementById('submitQuoteBtn');
+      const buyNowBtn = document.getElementById('buyNowBtn');
+      const quoteForm = document.getElementById('quoteForm');
+      const successMessage = document.getElementById('successMessage');
+      const newQuoteBtn = document.getElementById('newQuoteBtn');
+      
+      // Hidden fields for form submission
+      const unitPriceHidden = document.getElementById('unitPriceHidden');
+      const subtotalHidden = document.getElementById('subtotalHidden');
+      const packagingHidden = document.getElementById('packagingHidden');
+      const totalHidden = document.getElementById('totalHidden');
+      
+      // Format price function
+      function formatPrice(price) {
+        return '€' + parseFloat(price).toFixed(2).replace('.', ',');
+      }
+      
+      // Calculate quote
+      function calculateQuote() {
+        const selectedOption = productSelect.options[productSelect.selectedIndex];
+        
+        if (!selectedOption || !selectedOption.value) {
+          unitPrice.textContent = '€0,00';
+          subtotalPrice.textContent = '€0,00';
+          packagingCost.textContent = '€0,00';
+          totalPrice.textContent = '€0,00';
+          
+          unitPriceHidden.value = '';
+          subtotalHidden.value = '';
+          packagingHidden.value = '';
+          totalHidden.value = '';
+          return;
+        }
+        
+        const productPrice = parseFloat(selectedOption.dataset.price);
+        const quantityValue = parseInt(quantity.value);
+        
+        if (isNaN(productPrice) || isNaN(quantityValue) || quantityValue < 1) {
+          return;
+        }
+        
+        // Calculate packaging price based on quantity
+        let packagingPrice = 0;
+        if (quantityValue >= 7) {
+          if (quantityValue <= 20) {
+            packagingPrice = 7.50;
+          } else if (quantityValue <= 30) {
+            packagingPrice = 6.50;
+          } else if (quantityValue <= 50) {
+            packagingPrice = 5.50;
+          } else if (quantityValue <= 100) {
+            packagingPrice = 4.00;
+          }
+        }
+        
+        const subtotal = productPrice * quantityValue;
+        const packaging = packagingPrice * quantityValue;
+        const total = subtotal + packaging;
+        
+        // Update visible elements
+        unitPrice.textContent = formatPrice(productPrice);
+        subtotalPrice.textContent = formatPrice(subtotal);
+        packagingCost.textContent = formatPrice(packaging);
+        totalPrice.textContent = formatPrice(total);
+        
+        // Update hidden fields
+        unitPriceHidden.value = formatPrice(productPrice);
+        subtotalHidden.value = formatPrice(subtotal);
+        packagingHidden.value = formatPrice(packaging);
+        totalHidden.value = formatPrice(total);
+      }
+      
+      // Update product preview
+      function updateProductPreview() {
+        const selectedOption = productSelect.options[productSelect.selectedIndex];
+        
+        if (!selectedOption || !selectedOption.value) {
+          productPreview.classList.add('hidden');
+          return;
+        }
+        
+        const imageUrl = selectedOption.dataset.image;
+        const productName = selectedOption.value;
+        const price = selectedOption.text.split(' - ')[1];
+        
+        if (imageUrl) {
+          productImage.src = imageUrl;
+          productTitle.textContent = productName;
+          productPriceEl.textContent = price;
+          productPreview.classList.remove('hidden');
+        } else {
+          productPreview.classList.add('hidden');
+        }
+      }
+      
+      // Event listeners
+      productSelect.addEventListener('change', function() {
+        updateProductPreview();
+        calculateQuote();
+        
+        if (this.value) {
+          productError.style.display = 'none';
+        }
+      });
+      
+      quantity.addEventListener('change', function() {
+        const quantityValue = parseInt(this.value);
+        
+        if (quantityValue < 7) {
+          quantityError.style.display = 'block';
+        } else {
+          quantityError.style.display = 'none';
+        }
+        
+        calculateQuote();
+      });
+      
+      // Form submission
+      weddingForm.addEventListener('submit', function(e) {
+        // Validate
+        if (!productSelect.value) {
+          e.preventDefault();
+          productError.style.display = 'block';
+          return false;
+        }
+        
+        const quantityValue = parseInt(quantity.value);
+        if (isNaN(quantityValue) || quantityValue < 7) {
+          e.preventDefault();
+          quantityError.style.display = 'block';
+          return false;
+        }
+        
+        // Form will be submitted to Formspree
+        // The success page will be shown after successful submission
+        setTimeout(function() {
+          weddingForm.style.display = 'none';
+          successMessage.style.display = 'block';
+        }, 1000);
+      });
+      
+      // Buy now button
+      buyNowBtn.addEventListener('click', function() {
+        // Validate
+        if (!productSelect.value) {
+          productError.style.display = 'block';
+          return;
+        }
+        
+        if (parseInt(quantity.value) < 7) {
+          quantityError.style.display = 'block';
+          return;
+        }
+        
+        // Redirect to the collection page
+        window.parent.location.href = 'https://igiardinidigiulia.it/collections/bomboniere-green-per-matrimoni-ed-eventi-i-giardini-di-giulia';
+      });
+      
+      // New quote button
+      newQuoteBtn.addEventListener('click', function() {
+        // Reset form
+        weddingForm.reset();
+        
+        // Reset display
+        unitPrice.textContent = '€0,00';
+        subtotalPrice.textContent = '€0,00';
+        packagingCost.textContent = '€0,00';
+        totalPrice.textContent = '€0,00';
+        productPreview.classList.add('hidden');
+        
+        // Show form again
+        successMessage.style.display = 'none';
+        weddingForm.style.display = 'block';
+      });
+      
+      // Initialize
+      calculateQuote();
+    });
+  </script>
+</body>
+</html>
